@@ -1,20 +1,7 @@
-var express = require('express');
-var cors = require('cors');
-require('dotenv').config()
+import { app } from "./src/express.mjs";
+import { logger } from "./src/logger.mjs";
 
-var app = express();
-
-app.use(cors());
-app.use('/public', express.static(process.cwd() + '/public'));
-
-app.get('/', function (req, res) {
-  res.sendFile(process.cwd() + '/views/index.html');
-});
-
-
-
-
-const port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log('Your app is listening on port ' + port)
+// Listen on port set in environment variable or default to 3000
+var listener = app.listen(3000, function () {
+  logger.info('Your app is listening on port ' + listener.address().port);
 });
