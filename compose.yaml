@@ -7,4 +7,4 @@ services:
     environment:
       - NODE_ENV="production"
     volumes:
-      - /home/ubuntu/running/logs/freecodecamp-urlshortener:/program/logs
+      - /home/ubuntu/running/logs/freecodecamp-filemetadata:/program/logs
