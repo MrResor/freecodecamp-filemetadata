@@ -1,7 +1,7 @@
 openapi: 3.0.3
 
 info:
-  title: Urlshortener Microservice
+  title: File Metadata Microservice
   description: Solution of a freecodecamp task for creating a urlshortener microservice.
   contact:
     email: jakusienko@gmail.com
@@ -15,57 +15,35 @@ externalDocs:
   description: FreeCodeCamp
 
 servers:
-  - url: https://urlshortener.profresor.net
+  - url: https://filemetadata.profresor.net
 
 paths:
-  /api/urlshortener:
+  /api/fileanalyse:
     post:
       tags:
         - endpoints
-      summary: Shorten a URL
-      description: Takes in a URL and returns a shortened version of it.
+      summary: File metadata
+      description: "Upload a file and get its metadata. NOTE: If file is bigger than 10MB and has wrong extension (mainly executable types) endpoint may enter endless pending, refer to README link up top."
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                url:
+                file:
                   type: string
-                  format: uri
-              example:
-                url: "https://www.google.com"
+                  format: binary
       responses:
         200:
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/URL"
-        401:
-          description: Invalid URL
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                example:
-                  error: "Invalid url"
+                $ref: "#/components/schemas/METADATA"
 
-  /api/shorturl/{id}:
-    get:
-      tags:
-        - endpoints
-      summary: Get current date
-      description: Get current date in both unix and utc formats
-      responses:
-        301:
-          description: Successful operation, redirecting user to the original URL
-        401:
-          description: Invalid ID, non integer passed as id
+        400:
+          description: Provided file missing or incorrect
           content:
             application/json:
               schema:
@@ -73,10 +51,21 @@ paths:
                 properties:
                   error:
                     type: string
-                example:
-                  error: "Invalid ID"
-        404:
-          description: ID not found
+              examples:
+                FileTooLarge:
+                  summary: File too large
+                  value:
+                    error: File size exceeds limit of 10MB
+                InvalidExtension:
+                  summary: Invalid file extension
+                  value:
+                    error: File type not allowed
+                TwoExtensions:
+                  summary: File has two or more extensions
+                  value:
+                    error: File name contains more than one extension
+        500:
+          description: Internal server error
           content:
             application/json:
               schema:
@@ -84,8 +73,8 @@ paths:
                 properties:
                   error:
                     type: string
-                example:
-                  error: "No url found for the given ID"
+              example:
+                error: "Internal server error"
 
   /api/hello:
     get:
@@ -108,14 +97,17 @@ paths:
       
 components:
   schemas:
-    URL:
+    METADATA:
       type: object
       properties:
-        original_url: 
+        name:
           type: string
-        short_url:
+        type:
+          type: string
+        size:
           type: integer
-      example: 
-        original_url: "https://www.google.com"
-        short_url: 40
+      example:
+        name: "example.txt"
+        type: "text/plain"
+        size: 12345
         
