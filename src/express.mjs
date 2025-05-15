@@ -35,10 +35,11 @@ router.use((req, _, next) => {
         }
     });
 
-    let msg = `${req.method} ${req.path} - ${req.ip}`
+    let ip = Object.hasOwn(req.headers, 'x-forwarded-for') ? req.headers['x-forwarded-for'] : req.ip;
+    let msg = `${req.method} ${req.path}${query} - ${ip}`
 
     if (hasRouteToHandle) {
-        logger.info(msg);
+        logger.http(msg);
     } else {
         // No matching route for this request
         logger.error(msg);
