@@ -1,28 +1,29 @@
 import express from 'express';
 import multer from 'multer';
 import fs from 'fs';
+import logger from '../../logger.mjs';
 
 const filemetadata = express.Router();
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (req, res, cb) => {
         cb(null, './uploads/');
     },
 });
+
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 100MB
-    fileFilter: (req, file, cb) => {
+    limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB
+    fileFilter: (_, file, cb) => {
+        var err = new Error();
+        const blocked = ["exe", "bat", "ps1", "js", "vbs", "sh", "msi", "ps1"];
         const parts = file.originalname.split('.');
         if (parts.length > 2) {
-            let err = new Error();
             err.code = 'TWO_EXT_FILE';
-            return cb(err);
+            cb(err, false);
         }
-        const ext = parts[parts.length - 1].toLowerCase();
-        if (['exe', 'js', 'sh', 'bat', 'ps1'].includes(ext)) {
-            let err = new Error();
+        if (blocked.includes(parts[parts.length - 1])) {
             err.code = 'BAD_EXT_FILE';
-            return cb(err);
+            cb(err, false);
         }
         cb(null, true) // Allow file upload
     }
@@ -31,28 +32,40 @@ const upload = multer({
 filemetadata.post('/api/fileanalyse', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
+            let code, msg;
             switch (err.code) {
                 case 'LIMIT_FILE_SIZE':
-                    return res.status(400).json({ error: 'File size exceeds limit of 10MB' });
+                    code = 400;
+                    msg = 'File size exceeds limit of 10MB';
+                    break;
                 case 'TWO_EXT_FILE':
-                    return res.status(400).json({ error: 'File name contains more than one extension' });
+                    console.log('I WORK');
+                    code = 400;
+                    msg = 'File name contains more than one extension';
+                    break;
                 case 'BAD_EXT_FILE':
-                    return res.status(400).json({ error: 'File type not allowed' });
+                    code = 400;
+                    msg = 'File type not allowed';
+                    break;
                 default:
-                    return res.status(500).json({ error: 'Internal server error' });
+                    code = 500;
+                    msg = 'Internal server error';
             }
+            return res.status(code).json({ error: msg });
         }
 
         if (!req.file) {
             return res.status(400).json({ error: 'No file uploaded' });
         }
+
         const { originalname, mimetype, size } = req.file;
         fs.unlink(req.file.path, (err) => {
             if (err) {
-                console.error('Error deleting file:', err);
+                logger.error('Error deleting file:', err);
             }
         });
-        res.status(200).json({
+
+        return res.status(200).json({
             name: originalname,
             type: mimetype,
             size: size
