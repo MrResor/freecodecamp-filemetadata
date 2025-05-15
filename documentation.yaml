@@ -2,7 +2,7 @@ openapi: 3.0.3
 
 info:
   title: File Metadata Microservice
-  description: Solution of a freecodecamp task for creating a urlshortener microservice.
+  description: Solution of a freecodecamp task for creating a file metadata microservice.
   contact:
     email: jakusienko@gmail.com
   license:
