@@ -23,13 +23,13 @@ const logger = winston.createLogger({
         // - Write all logs with importance level of `info` or less to `combined.log`
         //
         new winston.transports.File({ filename: './logs/error.log', level: 'warn' }),
-        new winston.transports.File({ filename: './logs/combined.log' })
+        new winston.transports.File({ filename: './logs/combined.log', level: 'http' })
     ]
 });
 
 
 if (process.env.NODE_ENV !== 'production') {
-    logger.add(new winston.transports.Console({ format: combined }));
+    logger.add(new winston.transports.Console({ format: combined , level: 'http'}));
 }
 
 export { logger };
