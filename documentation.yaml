@@ -13,6 +13,9 @@ info:
 externalDocs:
   url: https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/url-shortener-microservice
   description: FreeCodeCamp
+externalDocs:
+  url: https://github.com/MrResor/freecodecamp-filemetadata?tab=readme-ov-file
+  description: README
 
 servers:
   - url: https://filemetadata.profresor.net
