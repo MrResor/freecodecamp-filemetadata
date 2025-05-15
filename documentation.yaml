@@ -64,6 +64,10 @@ paths:
                   summary: File has two or more extensions
                   value:
                     error: File name contains more than one extension
+                NoFile:
+                  summary: No file provided
+                  value:
+                    error: No file uploaded
         500:
           description: Internal server error
           content:
