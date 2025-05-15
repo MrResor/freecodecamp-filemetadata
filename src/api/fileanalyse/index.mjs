@@ -1,7 +1,8 @@
 import express from 'express';
 import multer from 'multer';
 import fs from 'fs';
-import logger from '../../logger.mjs';
+
+import { logger } from '../../logger.mjs';
 
 const filemetadata = express.Router();
 const storage = multer.diskStorage({
