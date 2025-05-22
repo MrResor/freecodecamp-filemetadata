@@ -13,9 +13,6 @@ info:
 externalDocs:
   url: https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/url-shortener-microservice
   description: FreeCodeCamp
-externalDocs:
-  url: https://github.com/MrResor/freecodecamp-filemetadata?tab=readme-ov-file
-  description: README
 
 servers:
   - url: https://filemetadata.profresor.net
@@ -26,7 +23,10 @@ paths:
       tags:
         - endpoints
       summary: File metadata
-      description: "Upload a file and get its metadata. NOTE: If file is bigger than 10MB and has wrong extension (mainly executable types) endpoint may enter endless pending, refer to README link up top."
+      description: "Upload a file and get its metadata. NOTE: If file is bigger than 10MB and has wrong extension (mainly executable types) endpoint may enter endless pending, refer to README link."
+      externalDocs:
+        url: https://github.com/MrResor/freecodecamp-filemetadata?tab=readme-ov-file
+        description: README
       requestBody:
         required: true
         content:
