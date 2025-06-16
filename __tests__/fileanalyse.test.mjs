@@ -18,7 +18,6 @@ const files = {
   't11.exe': 11 * 1024 * 1024
 }
 
-
 beforeAll(() => {
   for (const [key, value] of Object.entries(files)) {
     filePrep(key, value)
@@ -44,7 +43,6 @@ describe('/api/fileanalyse', () => {
   })
 
   it('return 400 for file size limit exceeded', async () => {
-
     const res = await request(app).post('/api/fileanalyse').attach('upfile', 't2.jpg')
 
     expect(res.statusCode).toBe(400)
