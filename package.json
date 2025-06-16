@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.mjs",
+    "test": "vitest --reporter=github-actions --reporter=verbose --run",
     "standard": "standard",
     "lint": "standard --fix"
   },
