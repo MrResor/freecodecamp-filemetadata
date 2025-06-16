@@ -1,17 +1,17 @@
-import fs from "fs";
-import path from "path";
+import fs from 'fs'
+import path from 'path'
 
-import express from "express";
-import swaggerUi from "swagger-ui-express";
-import YAML from "yaml";
+import express from 'express'
+import swaggerUi from 'swagger-ui-express'
+import YAML from 'yaml'
 
-const __dirname = import.meta.dirname;
+const __dirname = import.meta.dirname
 
-const file = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'documentation.yaml'), 'utf8');
-const swaggerDocument = YAML.parse(file);
+const file = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'documentation.yaml'), 'utf8')
+const swaggerDocument = YAML.parse(file)
 
-const docs = express.Router();
+const docs = express.Router()
 
-docs.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+docs.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-export { docs };
+export { docs }
