@@ -40,7 +40,6 @@ filemetadata.post('/api/fileanalyse', (req, res) => {
           msg = 'File size exceeds limit of 10MB'
           break
         case 'TWO_EXT_FILE':
-          console.log('I WORK')
           code = 400
           msg = 'File name contains more than one extension'
           break
