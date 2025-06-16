@@ -16,7 +16,7 @@ const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB
   fileFilter: (_, file, cb) => {
     const err = new Error()
-    const blocked = ['exe', 'bat', 'ps1', 'js', 'vbs', 'sh', 'msi', 'ps1']
+    const blocked = ['exe', 'bat', 'ps1', 'js', 'vbs', 'sh', 'msi']
     const parts = file.originalname.split('.')
     if (parts.length > 2) {
       err.code = 'TWO_EXT_FILE'
