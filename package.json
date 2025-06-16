@@ -4,7 +4,9 @@
   "description": "API project for freeCodeCamp",
   "main": "index.js",
   "scripts": {
-    "start": "node index.mjs"
+    "start": "node index.mjs",
+    "standard": "standard",
+    "lint": "standard --fix"
   },
   "dependencies": {
     "cors": "^2.8.5",
