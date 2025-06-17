@@ -22,7 +22,7 @@ beforeAll(() => {
   for (const [key, value] of Object.entries(files)) {
     filePrep(key, value)
   }
-})
+}, 60_000)
 
 afterAll(() => {
   Object.keys(files).forEach((key) => {
