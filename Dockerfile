@@ -4,5 +4,5 @@ COPY . ./program
 WORKDIR /program
 RUN npm i
 RUN npm audit fix
-RUN mkdir uploads
+RUN mkdir -p uploads
 CMD ["npm", "run", "start"]
