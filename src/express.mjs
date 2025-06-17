@@ -1,6 +1,5 @@
 import cors from 'cors'
 import express from 'express'
-import path from 'path'
 
 import { docs } from './api/docs/index.mjs'
 import { filemetadata } from './api/fileanalyse/index.mjs'
@@ -10,7 +9,6 @@ import { logger } from './logger.mjs'
 
 const app = express()
 const router = express.Router()
-const __dirname = import.meta.dirname
 
 // Middleware declaration
 
@@ -19,7 +17,7 @@ const __dirname = import.meta.dirname
 router.use(cors({ optionsSuccessStatus: 200 })) // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
-router.use(express.static(path.join(__dirname, '..', 'public')))
+router.use(express.static('public'))
 
 router.use((req, _, next) => {
   let hasRouteToHandle = null
