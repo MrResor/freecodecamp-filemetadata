@@ -19,7 +19,7 @@ const __dirname = import.meta.dirname
 router.use(cors({ optionsSuccessStatus: 200 })) // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
-router.use(express.static(path.join(__dirname, '..', 'public')))
+router.use(express.static('public'))
 
 router.use((req, _, next) => {
   let hasRouteToHandle = null
