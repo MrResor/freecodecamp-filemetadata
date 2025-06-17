@@ -5,8 +5,8 @@ import path from 'path'
 import { docs } from './api/docs/index.mjs'
 import { filemetadata } from './api/fileanalyse/index.mjs'
 import { hello } from './api/hello/index.mjs'
-import { logger } from './logger.mjs'
 import { mainView } from './index.mjs'
+import { logger } from './logger.mjs'
 
 const app = express()
 const router = express.Router()
