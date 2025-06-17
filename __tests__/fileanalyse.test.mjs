@@ -34,6 +34,8 @@ describe('/api/fileanalyse', () => {
   it('return data about the file', async () => {
     const res = await request(app).post('/api/fileanalyse').attach('upfile', 't1.jpg')
 
+    console.log(res)
+
     expect(res.statusCode).toBe(200)
     expect(res.body).toEqual({
       name: 't1.jpg',
@@ -44,6 +46,8 @@ describe('/api/fileanalyse', () => {
 
   it('return 400 for file size limit exceeded', async () => {
     const res = await request(app).post('/api/fileanalyse').attach('upfile', 't2.jpg')
+
+    console.log(res)
 
     expect(res.statusCode).toBe(400)
     expect(res.body).toEqual({ error: 'File size exceeds limit of 10MB' })
