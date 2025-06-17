@@ -27,6 +27,9 @@ jobs:
 
       - name: Audit dependencies
         run: npm audit fix
+
+      - name: Create uploads folder
+        run: mkdir -p uploads
     
       - name: Run tests
         run: npm run test
