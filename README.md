@@ -1,6 +1,6 @@
 # File Metadata Microservice
 
-My solution for one of the tasks from [freecodecamp](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/file-metadata-microservice)freecodecamp. This task involved creation of a simple exercise tracker  microservice according to the given guidelines that can be found in the above link. The solution is currently available on my [website](https://filemetadata.profresor.net).
+My solution for one of the tasks from [freecodecamp](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/file-metadata-microservice). This task involved creation of a simple exercise tracker  microservice according to the given guidelines that can be found in the above link. The solution is currently available on my [website](https://filemetadata.profresor.net).
 
 ## Requirements
 
